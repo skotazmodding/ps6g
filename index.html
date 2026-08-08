@@ -457,14 +457,12 @@
             letter-spacing: -2px;
         }
 
-        /* Masonry columns — pas de ratio imposé, les images gardent leurs proportions */
+        /* Masonry columns */
         .gallery-grid {
             columns: 4;
             column-gap: 3px;
             padding: 0 3px;
         }
-        .gallery-grid .g-item:nth-child(1),
-        .gallery-grid .g-item:nth-child(5) { /* reset les anciennes règles span */ }
 
         .g-item {
             position: relative;
@@ -473,9 +471,8 @@
             break-inside: avoid;
             margin-bottom: 3px;
             display: block;
+            cursor: zoom-in !important;
         }
-        /* Supprimer l'aspect-ratio fixe */
-        .g-item:nth-child(1) { aspect-ratio: unset; }
 
         .g-item img {
             width: 100%;
@@ -499,9 +496,6 @@
         .g-item:hover::after { opacity: 0; }
 
         /* Lightbox overlay */
-        .g-item {
-            cursor: zoom-in !important;
-        }
         .lightbox {
             display: none;
             position: fixed;
@@ -553,7 +547,6 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
-            -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
         }
         .lightbox-nav:hover { background: rgba(217,31,42,0.3); border-color: var(--rouge); color: #fff; }
@@ -572,212 +565,6 @@
             color: rgba(255,255,255,0.3);
         }
 
-        /* ════════════════════════════════════════
-           DOWNLOAD CTA
-        ════════════════════════════════════════ */
-        .cta-section {
-            position: relative;
-            overflow: hidden;
-            padding: 100px 48px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--fond2) 0%, #120810 100%);
-            border-top: 1px solid var(--bordure);
-            border-bottom: 1px solid var(--bordure);
-        }
-        /* Glow de fond */
-        .cta-glow {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px; height: 300px;
-            background: radial-gradient(ellipse, rgba(217,31,42,0.18) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .cta-grid-bg {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(ellipse 80% 80% at center, black 0%, transparent 100%);
-        }
-        .cta-label {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--rouge-vif);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .cta-title {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #fff;
-            margin-bottom: 12px;
-            position: relative;
-            line-height: 1;
-        }
-        .cta-subtitle {
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: rgba(242,244,248,0.45);
-            margin-bottom: 48px;
-            position: relative;
-        }
-        .cta-btn-wrap {
-            position: relative;
-            display: inline-block;
-        }
-        /* Pulsing ring derrière le bouton */
-        .cta-btn-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -12px;
-            border-radius: 12px;
-            background: rgba(217,31,42,0.12);
-            border: 1px solid rgba(217,31,42,0.2);
-            animation: ringPulse 2.5s ease-in-out infinite;
-        }
-        .cta-btn-wrap::after {
-            content: '';
-            position: absolute;
-            inset: -24px;
-            border-radius: 16px;
-            border: 1px solid rgba(217,31,42,0.08);
-            animation: ringPulse 2.5s 0.6s ease-in-out infinite;
-        }
-        @keyframes ringPulse {
-            0%,100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.03); }
-        }
-        .btn-download-main {
-            display: inline-flex;
-            align-items: center;
-            gap: 18px;
-            padding: 22px 52px 22px 36px;
-            background: linear-gradient(135deg, var(--rouge) 0%, var(--rouge-sombre) 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 900;
-            font-size: 1.3rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            box-shadow:
-                0 20px 60px rgba(217,31,42,0.5),
-                0 0 0 1px rgba(255,255,255,0.08) inset,
-                0 1px 0 rgba(255,255,255,0.15) inset;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .btn-download-main::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -80%;
-            width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
-            transition: left 0.6s ease;
-        }
-        .btn-download-main:hover::after { left: 160%; }
-        .btn-download-main:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 30px 70px rgba(217,31,42,0.65), 0 0 0 1px rgba(255,255,255,0.1) inset;
-        }
-        .dl-icon-wrap {
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        .cta-meta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 28px;
-            position: relative;
-        }
-        .cta-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
-        }
-        .cta-meta-item i { font-size: 0.65em; }
-
-        /* ════════════════════════════════════════
-           FOOTER
-        ════════════════════════════════════════ */
-        .footer {
-            padding: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--bordure);
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer-left {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .footer-brand {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
-        }
-        .footer-copy {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.15);
-            letter-spacing: 0.5px;
-        }
-        .btn-discord-footer {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 22px;
-            background: rgba(88,101,242,0.12);
-            border: 1px solid rgba(88,101,242,0.3);
-            border-radius: 6px;
-            color: rgba(165,171,255,0.7);
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .btn-discord-footer:hover {
-            background: rgba(88,101,242,0.22);
-            color: #C5CAFF;
-            border-color: rgba(88,101,242,0.5);
-        }
-
-        /* ════════════════════════════════════════
-           RESPONSIVE
-        ════════════════════════════════════════ */
         /* ════════════════════════════════════════
            SECTION DESCRIPTION — PORTES & EXTRAS
         ════════════════════════════════════════ */
@@ -831,7 +618,6 @@
         }
         .desc-card-body { padding: 16px 20px; }
 
-        /* Véhicule */
         .veh-name {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.4rem;
@@ -840,7 +626,6 @@
             letter-spacing: 2px;
         }
 
-        /* Portes & Extras : liste */
         .ref-list {
             display: flex;
             flex-direction: column;
@@ -869,7 +654,6 @@
             line-height: 1.4;
         }
 
-        /* Extras — badge numéroté */
         .extra-item {
             display: flex;
             gap: 12px;
@@ -902,6 +686,112 @@
         }
 
         /* ════════════════════════════════════════
+           SECTION PRESET EDM
+        ════════════════════════════════════════ */
+        .edm-section {
+            padding: 80px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid var(--bordure);
+        }
+        .edm-container {
+            background: var(--fond2);
+            border: 1px solid var(--bordure);
+            border-radius: 12px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+        .edm-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--rouge-vif), var(--or));
+        }
+        .edm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .edm-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .edm-badge-v4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(245,197,24,0.15);
+            color: var(--or);
+            border: 1px solid rgba(245,197,24,0.3);
+            text-transform: uppercase;
+        }
+        .btn-download-edm {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(217,31,42,0.15);
+            border: 1px solid rgba(217,31,42,0.4);
+            border-radius: 6px;
+            color: var(--rouge-vif);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .btn-download-edm:hover {
+            background: var(--rouge);
+            color: #fff;
+            border-color: var(--rouge-vif);
+            box-shadow: 0 6px 20px rgba(217,31,42,0.4);
+            transform: translateY(-2px);
+        }
+        .edm-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(245,197,24,0.06);
+            border: 1px solid rgba(245,197,24,0.2);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: rgba(242,244,248,0.8);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .edm-note i {
+            color: var(--or);
+            font-size: 1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .edm-note strong {
+            color: var(--or);
+            font-weight: 600;
+        }
+        .edm-kbd {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--blanc);
+            font-size: 0.8em;
+        }
+
+        /* ════════════════════════════════════════
            GUIDE D'INSTALLATION
         ════════════════════════════════════════ */
         .install-section {
@@ -910,7 +800,6 @@
             margin: 0 auto;
             border-top: 1px solid var(--bordure);
         }
-        /* Réutilisation des styles timeline de l'autre site */
         .steps-list {
             display: flex;
             flex-direction: column;
@@ -992,7 +881,6 @@
         }
         .step-desc strong { color: var(--blanc); font-weight: 600; }
 
-        /* Path box */
         .path-box {
             display: inline-flex;
             align-items: center;
@@ -1011,7 +899,6 @@
         }
         .path-box i { opacity: 0.6; font-size: 0.8em; }
 
-        /* Code block */
         .code-wrap { position: relative; margin-top: 14px; }
         .code-header {
             display: flex;
@@ -1036,7 +923,7 @@
             padding: 18px 20px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.82rem;
-            line-height: 2;
+            line-height: 1.8;
             color: #7FFFD4;
             white-space: pre-wrap;
             overflow-x: auto;
@@ -1066,7 +953,6 @@
             color: var(--vert);
         }
 
-        /* Final card */
         .final-card {
             margin-top: 14px;
             padding: 20px 24px;
@@ -1116,14 +1002,149 @@
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+        /* ════════════════════════════════════════
+           DOWNLOAD CTA
+        ════════════════════════════════════════ */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+            padding: 100px 48px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--fond2) 0%, #120810 100%);
+            border-top: 1px solid var(--bordure);
+            border-bottom: 1px solid var(--bordure);
+        }
+        .cta-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(ellipse, rgba(217,31,42,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 80% 80% at center, black 0%, transparent 100%);
+        }
+        .cta-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--rouge-vif);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .cta-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 12px;
+            position: relative;
+            line-height: 1;
+        }
+        .cta-subtitle {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(242,244,248,0.45);
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .cta-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 28px;
+            position: relative;
+        }
+        .cta-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+        }
+        .cta-meta-item i { font-size: 0.65em; }
+
+        /* ════════════════════════════════════════
+           FOOTER
+        ════════════════════════════════════════ */
+        .footer {
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--bordure);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .footer-brand {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.15);
+            letter-spacing: 0.5px;
+        }
+        .btn-discord-footer {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            background: rgba(88,101,242,0.12);
+            border: 1px solid rgba(88,101,242,0.3);
+            border-radius: 6px;
+            color: rgba(165,171,255,0.7);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-discord-footer:hover {
+            background: rgba(88,101,242,0.22);
+            color: #C5CAFF;
+            border-color: rgba(88,101,242,0.5);
+        }
+
         @media (max-width: 768px) {
             .topbar { padding: 0 16px; }
             .hero-content { padding: 0 20px 60px; }
             .section-info { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
             .gallery-grid { columns: 2; }
             .gallery-header { padding: 0 20px 24px; }
+            .desc-grid { grid-template-columns: 1fr; }
+            .desc-section, .edm-section, .install-section { padding: 48px 20px; }
             .cta-section { padding: 60px 20px; }
             .footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+            .edm-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -1181,11 +1202,11 @@
     <div class="info-left">
         <p class="info-label">À propos du véhicule</p>
         <h2 class="info-title">Premiers Secours<br>6<sup style="font-size:0.6em;">e</sup> Génération</h2>
-<p class="info-desc">
-    Le <strong>PS6G</strong> est la dernière évolution du véhicule de premiers secours de la <strong>Brigade de Sapeurs-Pompiers de Paris</strong>. Cette reproduction pour GTA V a été réalisée avec une attention particulière portée à l'authenticité, en respectant les marquages, les équipements opérationnels, les détails extérieurs ainsi que la signalisation lumineuse du véhicule réel.
-    <br><br>
-    Basé sur les modèles actuellement en service au sein des centres de secours parisiens, il offre un niveau de réalisme élevé pour les joueurs et communautés recherchant une expérience immersive et fidèle aux interventions de la BSPP.
-</p>
+        <p class="info-desc">
+            Le <strong>PS6G</strong> est la dernière évolution du véhicule de premiers secours de la <strong>Brigade de Sapeurs-Pompiers de Paris</strong>. Cette reproduction pour GTA V a été réalisée avec une attention particulière portée à l'authenticité, en respectant les marquages, les équipements opérationnels, les détails extérieurs ainsi que la signalisation lumineuse du véhicule réel.
+            <br><br>
+            Basé sur les modèles actuellement en service au sein des centres de secours parisiens, il offre un niveau de réalisme élevé pour les joueurs et communautés recherchant une expérience immersive et fidèle aux interventions de la BSPP.
+        </p>
     </div>
 
     <div class="info-right">
@@ -1279,7 +1300,7 @@
         <div class="g-item" onclick="openLightbox(10)">
             <img src="https://i.postimg.cc/Ch2GSMWF/GTA5-2026-05-31-22-59.png" alt="PS6G capture 11" loading="lazy">
         </div>
-        <div class="g-item" onclick="openLightbox(10)">
+        <div class="g-item" onclick="openLightbox(11)">
             <img src="https://i.postimg.cc/jx2Hpnkt/GTA5-2026-05-31-20-06.png" alt="PS6G capture 12" loading="lazy">
         </div>
     </div>
@@ -1300,7 +1321,6 @@
     <h2 class="section-ttl">Description du véhicule</h2>
 
     <div class="desc-grid">
-
         <!-- Véhicule -->
         <div class="desc-card">
             <div class="desc-card-head">
@@ -1391,7 +1411,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -1401,7 +1420,6 @@
     <h2 class="section-ttl">Guide d'installation</h2>
 
     <div class="steps-list">
-
         <!-- Étape 1 -->
         <div class="step-card">
             <div class="step-timeline">
@@ -1505,10 +1523,58 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
+<!-- ─ SECTION PRESET EDM ─ -->
+<section class="edm-section">
+    <p class="section-eyebrow">Extras and Door Manager</p>
+    <h2 class="section-ttl" style="margin-bottom: 28px;">Configuration Preset EDM</h2>
+
+    <div class="edm-container">
+        <div class="edm-header">
+            <div class="edm-title-wrap">
+                <h3 style="font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Preset PS6G</h3>
+                <span class="edm-badge-v4">Requis : EDM v4</span>
+            </div>
+            <a href="https://discord.com/channels/1422838227777093765/1524535741760274463" target="_blank" class="btn-download-edm">
+                <i class="fas fa-download"></i> Télécharger EDM (v4)
+            </a>
+        </div>
+
+        <div class="edm-note">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <strong>Information de commande :</strong> Appuyez sur la touche <span class="edm-kbd">K</span> pour activer les feux oranges du véhicule. <em>Veillez impérativement à utiliser la dernière version de EDM (v4).</em>
+            </div>
+        </div>
+
+        <div class="code-wrap">
+            <div class="code-header">
+                <span>Preset XML — PS6G</span>
+                <button class="btn-copy" id="copyEdmBtn" onclick="copyEdmCode()">
+                    <i class="fas fa-copy"></i> Copier
+                </button>
+            </div>
+            <code class="code-block" id="edmCode">&lt;Vehicle model="ps6g"&gt;
+    &lt;Extras&gt;
+      &lt;Extra id="1" keybind="K" disable="None" name="FP Arriere" /&gt;
+      &lt;Extra id="2" keybind="None" disable="None" name="SpotLight" /&gt;
+      &lt;Extra id="3" keybind="None" disable="4" name="Rideaux Fermés" /&gt;
+      &lt;Extra id="4" keybind="None" disable="3" name="Rideaux Ouverts" /&gt;
+      &lt;Extra id="5" keybind="None" disable="None" name="Devidoir Gauche" /&gt;
+      &lt;Extra id="6" keybind="None" disable="None" name="Devidoir Droit" /&gt;
+      &lt;Extra id="7" keybind="None" disable="None" name="Echelles Toit" /&gt;
+      &lt;Extra id="8" keybind="None" disable="None" name="Trappes Laterales" /&gt;
+    &lt;/Extras&gt;
+  &lt;/Vehicle&gt;</code>
+        </div>
+
+        <div style="margin-top: 16px; text-align: right; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris);">
+            by <span style="color: var(--rouge-vif);">AdN</span>
+        </div>
+    </div>
+</section>
 <!-- Toast -->
 <div class="toast" id="toast">
     <i class="fas fa-check-circle"></i> Copié dans le presse-papiers
@@ -1523,11 +1589,11 @@
     <p class="cta-subtitle">Télécharge le PS6G BSPP et rejoins notre serveur</p>
 
     <a href="https://drive.google.com/file/d/18TrJjVXvhsXQ5npQn4yMzEa2iVHg-A5Y/view?usp=sharing" target="_blank" class="btn-download-hero">
-            <span class="btn-icon"><i class="fas fa-download"></i></span>
-            <span class="btn-text-block">
+        <span class="btn-icon"><i class="fas fa-download"></i></span>
+        <span class="btn-text-block">
             <span>Télécharger le PS6G</span>
-        </a>
-    </div>
+        </span>
+    </a>
 
     <div class="cta-meta">
         <span class="cta-meta-item"><i class="fas fa-check-circle"></i> Gratuit</span>
@@ -1596,15 +1662,19 @@
         if (e.key === 'Escape') closeLightbox();
     });
 
+    function showToast() {
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => { t.classList.remove('show'); }, 3000);
+    }
+
     function copyCode() {
         const code = document.getElementById('installCode').innerText;
         navigator.clipboard.writeText(code).then(() => {
             const btn = document.getElementById('copyBtn');
             btn.classList.add('copied');
             btn.innerHTML = '<i class="fas fa-check"></i> Copié';
-            const t = document.getElementById('toast');
-            t.classList.add('show');
-            setTimeout(() => { t.classList.remove('show'); }, 3000);
+            showToast();
             setTimeout(() => {
                 btn.classList.remove('copied');
                 btn.innerHTML = '<i class="fas fa-copy"></i> Copier';
@@ -1612,13 +1682,26 @@
         });
     }
 
-    
+    function copyEdmCode() {
+        const code = document.getElementById('edmCode').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+            const btn = document.getElementById('copyEdmBtn');
+            btn.classList.add('copied');
+            btn.innerHTML = '<i class="fas fa-check"></i> Copié';
+            showToast();
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copier';
+            }, 2500);
+        });
+    }
+
     const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
         });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.spec-row, .g-item, .desc-card, .step-card').forEach(el => {
+    document.querySelectorAll('.spec-row, .g-item, .desc-card, .edm-container, .step-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(12px)';
         el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
